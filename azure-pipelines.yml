@@ -1,0 +1,31 @@
+
+pr: none
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  # Predefined Azure Pipelines variables. There's no need to modify them.
+  JF_GIT_PROJECT: $(System.TeamProject)
+  JF_GIT_REPO: $(Build.Repository.Name)
+  JF_GIT_API_ENDPOINT: $(System.CollectionUri)
+  JF_GIT_BASE_BRANCH: $(Build.SourceBranchName)
+  JF_GIT_OWNER: $(System.TeamProject)
+  JF_GIT_PROVIDER: 'azureRepos'
+
+jobs:
+  - job:
+    displayName: "Frogbot Scan Repository and Fix"
+    steps:
+       - task: CmdLine@2
+         displayName: 'Download and Run Frogbot'
+         env:
+            JF_URL: $(JF_URL)
+            JF_ACCESS_TOKEN: $(JF_ACCESS_TOKEN)
+            JF_GIT_TOKEN: $(JF_GIT_TOKEN)
+
+         inputs:
+            script: |
+               getFrogbotScriptPath=$(if [ -z "$JF_RELEASES_REPO" ]; then echo "https://releases.jfrog.io"; else echo "${JF_URL}/artifactory/${JF_RELEASES_REPO}"; fi)
+               curl -fLg "$getFrogbotScriptPath/artifactory/frogbot/v2/[RELEASE]/getFrogbot.sh" | sh
