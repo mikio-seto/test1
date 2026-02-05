@@ -38,11 +38,10 @@ jobs:
             targetType: 'inline'
             script: |
                if ([string]::IsNullOrEmpty($env:JF_RELEASES_REPO)) {
-                   $getFrogbotExeBasePath = "https://releases.jfrog.io"
+                   $url = "https://releases.jfrog.io/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
+                   curl.exe -fLg $url -o frogbot.exe
                } else {
-                   $getFrogbotExeBasePath = "${env:JF_URL}/artifactory/${env:JF_RELEASES_REPO}"
+                   $url = "${env:JF_URL}/artifactory/${env:JF_RELEASES_REPO}/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
+                   curl.exe -fLg -H "Authentication: Bearer $(JF_ACCESS_TOKEN)" $url -o frogbot.exe
                }
-
-               $url = "$getFrogbotExeBasePath/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
-               curl.exe -fLg $url -o frogbot.exe
                .\frogbot cfpr
