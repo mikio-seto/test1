@@ -33,7 +33,6 @@ jobs:
             JF_ACCESS_TOKEN: $(JF_ACCESS_TOKEN)
             JF_GIT_TOKEN: $(JF_GIT_TOKEN)
             JF_RELEASES_REPO: 'mikios-releases-jfrog-io'
-
          inputs:
             targetType: 'inline'
             script: |
