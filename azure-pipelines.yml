@@ -41,6 +41,6 @@ jobs:
                    curl.exe -fLg $url -o frogbot.exe
                } else {
                    $url = "${env:JF_URL}/artifactory/${env:JF_RELEASES_REPO}/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
-                   curl.exe -fLg -H "Authentication: Bearer $(JF_ACCESS_TOKEN)" $url -o frogbot.exe
+                   curl.exe -fLg -H "Authorization: Bearer $(JF_ACCESS_TOKEN)" $url -o frogbot.exe
                }
                .\frogbot cfpr
