@@ -11,14 +11,16 @@ variables:
   JF_GIT_PROJECT: $(System.TeamProject)
   JF_GIT_REPO: 'test1'
   JF_GIT_BASE_BRANCH: $(Build.SourceBranchName)
+  JF_GIT_BRANCH: $(Build.SourceBranch)         # refs/heads/main が入ります
+  JF_GIT_COMMIT: $(Build.SourceVersion)        # 40桁のフルSHAが入ります
+  JFROG_CLI_LOG_LEVEL: DEBUG
   JF_GIT_OWNER: 'mikio-seto'
   #JF_GIT_PULL_REQUEST_ID: $(System.PullRequest.PullRequestNumber)
   #JF_GIT_PULL_REQUEST_ID: 1
   JF_GIT_PROVIDER: 'github'
   GITHUB_JOB: 'azure-pipeline-job'
   GITHUB_WORKFLOW: 'azure-pipeline-wf'
-  #optional
-  JF_UPLOAD_SARIF: false
+
 
 jobs:
   - job:
