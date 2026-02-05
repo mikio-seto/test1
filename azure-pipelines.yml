@@ -2,8 +2,6 @@
 pr: none
 trigger: none
 
-pool: 
-  vmImage: ubuntu-latest
 
 variables:
   # Predefined Azure Pipelines variables. There's no need to modify them.
