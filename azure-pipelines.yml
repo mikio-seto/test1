@@ -30,13 +30,10 @@ jobs:
             script: |
                # 1. URLの組み立て
                if ([string]::IsNullOrEmpty($env:JF_RELEASES_REPO)) {
-                   $getFrogbotScriptPath = "https://releases.jfrog.io"
+                   $getFrogbotExeBasePath = "https://releases.jfrog.io"
                } else {
-                   $getFrogbotScriptPath = "${env:JF_URL}/artifactory/${env:JF_RELEASES_REPO}"
+                   $getFrogbotExeBasePath = "${env:JF_URL}/artifactory/${env:JF_RELEASES_REPO}"
                }
 
-               # 2. curlでスクリプトを落として実行
-               $url = "$getFrogbotScriptPath/artifactory/frogbot/v2/[RELEASE]/getFrogbot.sh"
-               # Windowsでは .sh は直接動かないので、curlで落とした後にBashがなければ詰みます。
-               # Frogbotがバイナリ(exe)を提供しているなら、それを落とすのが正解です。
-               curl.exe -fLg $url -o getFrogbot.sh
+               $url = "$getFrogbotExeBasePath/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
+               curl.exe -fLg $url -o frogbot.exe
