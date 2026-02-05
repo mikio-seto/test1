@@ -18,7 +18,7 @@ jobs:
   - job:
     displayName: "Frogbot Scan Repository and Fix"
     steps:
-       - task: Bash@3
+       - task: PowerShell@2
          displayName: 'Download and Run Frogbot'
          env:
             JF_URL: $(JF_URL)
@@ -28,5 +28,15 @@ jobs:
          inputs:
             targetType: 'inline'
             script: |
-               getFrogbotScriptPath=$(if [ -z "$JF_RELEASES_REPO" ]; then echo "https://releases.jfrog.io"; else echo "${JF_URL}/artifactory/${JF_RELEASES_REPO}"; fi)
-               curl -fLg "$getFrogbotScriptPath/artifactory/frogbot/v2/[RELEASE]/getFrogbot.sh" | sh
+               # 1. URLの組み立て
+               if ([string]::IsNullOrEmpty($env:JF_RELEASES_REPO)) {
+                   $getFrogbotScriptPath = "https://releases.jfrog.io"
+               } else {
+                   $getFrogbotScriptPath = "${env:JF_URL}/artifactory/${env:JF_RELEASES_REPO}"
+               }
+
+               # 2. curlでスクリプトを落として実行
+               $url = "$getFrogbotScriptPath/artifactory/frogbot/v2/[RELEASE]/getFrogbot.sh"
+               # Windowsでは .sh は直接動かないので、curlで落とした後にBashがなければ詰みます。
+               # Frogbotがバイナリ(exe)を提供しているなら、それを落とすのが正解です。
+               curl.exe -fLg $url -o getFrogbot.sh
