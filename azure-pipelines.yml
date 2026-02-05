@@ -26,6 +26,7 @@ jobs:
             JF_GIT_TOKEN: $(JF_GIT_TOKEN)
 
          inputs:
+            targetType: 'inline'
             script: |
                getFrogbotScriptPath=$(if [ -z "$JF_RELEASES_REPO" ]; then echo "https://releases.jfrog.io"; else echo "${JF_URL}/artifactory/${JF_RELEASES_REPO}"; fi)
                curl -fLg "$getFrogbotScriptPath/artifactory/frogbot/v2/[RELEASE]/getFrogbot.sh" | sh
