@@ -11,9 +11,9 @@ variables:
   JF_GIT_REPO: $(Build.Repository.Name)
   # JF_GIT_API_ENDPOINT: $(System.CollectionUri)
   JF_GIT_BASE_BRANCH: $(Build.SourceBranchName)
-  JF_GIT_OWNER: 'mikio-seto'
+  #JF_GIT_OWNER: 'mikio-seto'
   #JF_GIT_PULL_REQUEST_ID: $(System.PullRequest.PullRequestNumber)
-  JF_GIT_PULL_REQUEST_ID: 1
+  #JF_GIT_PULL_REQUEST_ID: 1
   JF_GIT_PROVIDER: 'github'
 
 jobs:
