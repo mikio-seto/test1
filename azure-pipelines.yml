@@ -18,7 +18,7 @@ jobs:
   - job:
     displayName: "Frogbot Scan Repository and Fix"
     steps:
-       - task: CmdLine@2
+       - task: Bash@3
          displayName: 'Download and Run Frogbot'
          env:
             JF_URL: $(JF_URL)
