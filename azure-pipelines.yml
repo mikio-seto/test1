@@ -28,6 +28,12 @@ jobs:
          inputs:
             targetType: 'inline'
             script: |
+               echo $env:JF_GIT_PROJECT
+               echo $env:JF_GIT_REPO
+               echo $env:JF_GIT_API_ENDPOINT
+               echo $env:JF_GIT_BASE_BRANCH
+               echo $env:JF_GIT_OWNER
+               echo $env:JF_GIT_PROVIDER
                if ([string]::IsNullOrEmpty($env:JF_RELEASES_REPO)) {
                    $getFrogbotExeBasePath = "https://releases.jfrog.io"
                } else {
