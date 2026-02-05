@@ -7,7 +7,6 @@ pool:
   name: Default
 
 variables:
-  # Predefined Azure Pipelines variables. There's no need to modify them.
   JF_GIT_PROJECT: $(System.TeamProject)
   JF_GIT_REPO: 'test1'
   JF_GIT_BASE_BRANCH: $(Build.SourceBranchName)
@@ -15,8 +14,6 @@ variables:
   JF_GIT_COMMIT: $(Build.SourceVersion)
   JFROG_CLI_LOG_LEVEL: DEBUG
   JF_GIT_OWNER: 'mikio-seto'
-  #JF_GIT_PULL_REQUEST_ID: $(System.PullRequest.PullRequestNumber)
-  #JF_GIT_PULL_REQUEST_ID: 1
   JF_GIT_PROVIDER: 'github'
   GITHUB_JOB: 'azure-pipeline-job'
   GITHUB_WORKFLOW: 'azure-pipeline-wf'
@@ -41,6 +38,7 @@ jobs:
                    curl.exe -fLg $url -o frogbot.exe
                } else {
                    $url = "${env:JF_URL}/artifactory/${env:JF_RELEASES_REPO}/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
-                   curl.exe -fLg -H "Authorization: Bearer $(JF_ACCESS_TOKEN)" $url -o frogbot.exe
+                   #curl.exe -fLg -H "Authorization: Bearer $(JF_ACCESS_TOKEN)" $url -o frogbot.exe
+                   Invoke-WebRequest -Uri $url -Headers @{ "Authorization" = "Bearer $JF_ACCESS_TOKEN" } -OutFile "frogbot.exe"
                }
                .\frogbot cfpr
