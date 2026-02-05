@@ -44,5 +44,5 @@ jobs:
 
                $url = "$getFrogbotExeBasePath/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
                curl.exe -fLg $url -o frogbot.exe
-               # .\frogbot cfpr
-               .\frogbot spr
+               .\frogbot cfpr
+               # .\frogbot spr
