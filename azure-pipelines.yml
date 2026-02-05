@@ -16,6 +16,9 @@ variables:
   #JF_GIT_PULL_REQUEST_ID: 1
   JF_GIT_PROVIDER: 'github'
   GITHUB_JOB: 'azure-pipeline-job'
+  GITHUB_WORKFLOW: 'azure-pipeline-wf'
+  #optional
+  JF_UPLOAD_SARIF: false
 
 jobs:
   - job:
