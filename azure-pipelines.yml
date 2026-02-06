@@ -1,6 +1,7 @@
 
 pr: 
  - main
+
 trigger: none
 
 pool:
@@ -9,8 +10,8 @@ pool:
 variables:
   JF_GIT_PROJECT: $(System.TeamProject)
   JF_GIT_REPO: 'test1'
-  JF_GIT_BASE_BRANCH: $(Build.SourceBranchName)
-  JF_GIT_BRANCH: $(System.PullRequest.SourceBranch)
+  JF_GIT_BASE_BRANCH: $(System.PullRequest.TargetBranch)  # main(マージ先)
+  JF_GIT_BRANCH: $(System.PullRequest.SourceBranch) # prするブランチ
   JF_GIT_COMMIT: $(Build.SourceVersion)
   JF_GIT_OWNER: 'mikio-seto'
   JF_GIT_PROVIDER: 'github'
@@ -40,6 +41,7 @@ jobs:
              echo Build.SourceBranchName: $(Build.SourceBranchName)
              echo Build.SourceBranch: $(Build.SourceBranch)
              echo Build.SourceVersion: $(Build.SourceVersion)
+             echo Build: $(Build)
 
        - task: PowerShell@2
          displayName: 'Download and Run Frogbot'
