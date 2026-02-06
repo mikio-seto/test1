@@ -10,14 +10,15 @@ pool:
 variables:
   JF_GIT_PROJECT: $(System.TeamProject)
   JF_GIT_REPO: 'test1'
-  JF_GIT_BASE_BRANCH: $(System.PullRequest.TargetBranch)  # main(マージ先)
-  JF_GIT_BRANCH: $(System.PullRequest.SourceBranch) # prするブランチ
+  JF_GIT_BASE_BRANCH: $[ replace(variables['System.PullRequest.TargetBranch'], 'refs/heads/', '') ]  # main(マージ先)
+  JF_GIT_BRANCH: $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ] # prするブランチ
+  JF_GIT_PULL_REQUEST_ID: $(System.PullRequest.PullRequestId)
   JF_GIT_COMMIT: $(Build.SourceVersion)
   JF_GIT_OWNER: 'mikio-seto'
   JF_GIT_PROVIDER: 'github'
   GITHUB_JOB: 'azure-pipeline-job'
   GITHUB_WORKFLOW: 'azure-pipeline-wf'
-  #JFROG_CLI_LOG_LEVEL: DEBUG
+  JFROG_CLI_LOG_LEVEL: DEBUG
 
 
 jobs:
@@ -60,4 +61,4 @@ jobs:
                    #curl.exe -fLg -H "Authorization: Bearer $(JF_ACCESS_TOKEN)" $url -o frogbot.exe
                    Invoke-WebRequest -Uri $url -Headers @{ "Authorization" = "Bearer $(JF_ACCESS_TOKEN)" } -OutFile "frogbot.exe"
                }
-               .\frogbot cfpr
+               .\frogbot spr
