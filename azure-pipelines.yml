@@ -12,17 +12,35 @@ variables:
   JF_GIT_BASE_BRANCH: $(Build.SourceBranchName)
   JF_GIT_BRANCH: $(System.PullRequest.SourceBranch)
   JF_GIT_COMMIT: $(Build.SourceVersion)
-  JFROG_CLI_LOG_LEVEL: DEBUG
   JF_GIT_OWNER: 'mikio-seto'
   JF_GIT_PROVIDER: 'github'
   GITHUB_JOB: 'azure-pipeline-job'
   GITHUB_WORKFLOW: 'azure-pipeline-wf'
+  #JFROG_CLI_LOG_LEVEL: DEBUG
 
 
 jobs:
   - job:
     displayName: "Frogbot Scan Repository and Fix"
     steps:
+       - task: PowerShell@2
+         displayName: 'show params'
+         inputs:
+           targetType: 'inline'
+           script: |
+             echo Build.Repository.ID: $(Build.Repository.ID)
+             echo Build.Repository.Name: $(Build.Repository.Name)
+             echo System.TeamProject: $(System.TeamProject)
+             echo System.PullRequest.SourceRepositoryURI: $(System.PullRequest.SourceRepositoryURI)
+             echo System.PullRequest.TargetBranch: $(System.PullRequest.TargetBranch)
+             echo System.PullRequest.SourceBranch: $(System.PullRequest.SourceBranch)
+             echo System.PullRequest.PullRequestId: $(System.PullRequest.PullRequestId)
+             echo Build.Repository.Uri: $(Build.Repository.Uri)
+             echo Build.Repository.Name: $(Build.Repository.Name)
+             echo Build.SourceBranchName: $(Build.SourceBranchName)
+             echo Build.SourceBranch: $(Build.SourceBranch)
+             echo Build.SourceVersion: $(Build.SourceVersion)
+
        - task: PowerShell@2
          displayName: 'Download and Run Frogbot'
          env:
