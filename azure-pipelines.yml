@@ -17,7 +17,7 @@ variables:
   JF_GIT_PROVIDER: 'github'
   GITHUB_JOB: 'azure-pipeline-job'
   GITHUB_WORKFLOW: 'azure-pipeline-wf'
-  #JFROG_CLI_LOG_LEVEL: DEBUG
+  JFROG_CLI_LOG_LEVEL: DEBUG
 
 
 jobs:
