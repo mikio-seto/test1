@@ -42,8 +42,6 @@ jobs:
              echo Build.SourceBranchName: $(Build.SourceBranchName)
              echo Build.SourceBranch: $(Build.SourceBranch)
              echo Build.SourceVersion: $(Build.SourceVersion)
-             echo Build: $(Build)
-
        - task: PowerShell@2
          displayName: 'Download and Run Frogbot'
          env:
