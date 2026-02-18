@@ -51,9 +51,11 @@ jobs:
             JF_ACCESS_TOKEN: $(JF_ACCESS_TOKEN)
             JF_GIT_TOKEN: $(JF_GIT_TOKEN)
             JF_RELEASES_REPO: 'mikios-releases-jfrog-io'
+            JAVA_HOME: 'C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot'
          inputs:
             targetType: 'inline'
             script: |
+               echo $(JAVA_HOME)
                mvn clean install -DskipTests
                if ([string]::IsNullOrEmpty($env:JF_RELEASES_REPO)) {
                    $url = "https://releases.jfrog.io/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
