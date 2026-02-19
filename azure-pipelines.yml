@@ -20,7 +20,7 @@ variables:
   GITHUB_JOB: 'azure-pipeline-job'
   GITHUB_WORKFLOW: 'azure-pipeline-wf'
   JFROG_CLI_LOG_LEVEL: DEBUG
-  JF_GIT_API_ENDPOINT: 'https://codeload.github.com'
+  # JF_GIT_API_ENDPOINT: 'https://codeload.github.com'
 
 
 jobs:
@@ -57,7 +57,6 @@ jobs:
          inputs:
             targetType: 'inline'
             script: |
-               mvn clean install -DskipTests
                if ([string]::IsNullOrEmpty($env:JF_RELEASES_REPO)) {
                    $url = "https://releases.jfrog.io/artifactory/frogbot/v2/[RELEASE]/frogbot-windows-amd64/frogbot.exe"
                    curl.exe -fLg $url -o frogbot.exe
