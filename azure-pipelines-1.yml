@@ -16,4 +16,4 @@ steps:
   displayName: 'Run SAST Scan'
   inputs:
     artifactoryConnection: 'JFrogCLI-v2' #project settingsで作成した名前
-    command: '--version'
+    command: 'jf --version'
