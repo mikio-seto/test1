@@ -12,5 +12,5 @@ steps:
 - task: JfrogCliV2@1
   displayName: 'Run SAST Scan'
   inputs:
-    jfrogArtifactoryService: 'JFrogCLI-v2' #project settingsで作成した名前
-    command: '--version'
+    artifactoryService: 'JFrogCLI-v2' #project settingsで作成した名前
+    command: 'jf --version'
