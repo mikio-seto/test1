@@ -1,0 +1,19 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: JfrogCliV2@1
+  displayName: 'Run SAST Scan'
+  inputs:
+    artifactoryConnection: 'JFrogCLI-v2' #project settingsで作成した名前
+    command: '--version'
