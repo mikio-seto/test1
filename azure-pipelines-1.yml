@@ -9,9 +9,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - task: JfrogCliV2@1
   displayName: 'Run SAST Scan'
   inputs:
